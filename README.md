@@ -31,4 +31,25 @@ go install github.com/beego/bee/v2@latest
 bee version 
 ```
 
+## Initializing Beego 
 
+- S1]
+```
+bee new myapp
+```
+
+- S2] 
+```
+cd myapp
+```
+- S3]
+```
+go get myapp
+```
+
+- S4]
+```
+bee run
+```
+
+- S5] go to [http://:8080](http://localhost:8080/)
