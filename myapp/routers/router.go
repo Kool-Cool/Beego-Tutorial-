@@ -7,5 +7,6 @@ import (
 
 func init() {
     beego.Router("/", &controllers.MainController{})
-	beego.Router("/hello ",&controllers.MainController{} , "get:SayHello") // New Line
+	//new line
+	beego.Router("/hello ",&controllers.MainController{} , "get:SayHello")
 }

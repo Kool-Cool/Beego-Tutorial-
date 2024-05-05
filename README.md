@@ -58,7 +58,7 @@ bee run
   
 Result should be 
 
-![](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/images/Screenshot%202024-05-05%20111630.png)
+![](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/images/home.png)
 
 ## Hello World
 ---
@@ -134,4 +134,8 @@ Result should be
 
 
   ```
-  
+
+  Result should be 
+
+  ![](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/images/HelloWorld.png)
+    

@@ -14,7 +14,7 @@ func (c *MainController) Get() {
 	c.TplName = "index.tpl"
 }
 
-
+// New Lines
 func (hello *MainController) SayHello(){
 	hello.TplName = "hello.html"
 }
