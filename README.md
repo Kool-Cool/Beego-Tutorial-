@@ -141,6 +141,7 @@ Result should be
 
 
 ## Making Own New Controller
+---
 
 NOTE:- [Make First Letter Capital](https://www.golinuxcloud.com/golang-variable-naming-convention/#:~:text=The%20convention%20also%20dictates%20that%20the%20names%20of%20global%20variables%20should%20start%20with%20uppercase%20letters%20if%20they%20are%20to%20be%20exported%2C%20meaning%20they%20will%20be%20accessible%20outside%20of%20the%20package.)
 
@@ -175,4 +176,24 @@ NOTE:- [Make First Letter Capital](https://www.golinuxcloud.com/golang-variable-
   }
 
   ```
-    
+
+
+## Sending Data  
+---
+
+Use `funcName.Data['attribute'] = value`
+
+```go
+
+func (hello *OwnTestController) SayHello(){
+	hello.Data["name"] = "This is my name !" 
+	hello.TplName = "hello.html"
+}
+
+```
+
+to access value , change html file `{{.attribute}}`
+
+```html
+<h2>{{.name}}</h2>
+```
