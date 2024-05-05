@@ -3,6 +3,7 @@ Step by Step guide for Beego Framework
 
 
 ## Installing [Beego](https://beego.wiki/docs/intro/introduction/)
+---
 
 - ### S1] Check for `bee` version
   in terminal
@@ -11,7 +12,7 @@ Step by Step guide for Beego Framework
   ```
 
 if result is like continue 
-```
+```go
  [D]  init global config instance failed. If you do not use this, just ignore it.  open conf/app.conf: The system cannot find the path specified.
 ______
 | ___ \
@@ -32,6 +33,7 @@ bee version
 ```
 
 ## Initializing Beego 
+---
 
 - S1]
 ```
@@ -57,3 +59,79 @@ bee run
 Result should be 
 
 ![](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/images/Screenshot%202024-05-05%20111630.png)
+
+## Hello World
+---
+
+- S1] Controllers
+
+  Go to controllers > default.go
+
+  Make new function using `MainController`
+  ```go
+  package controllers
+
+  import (
+  	beego "github.com/beego/beego/v2/server/web"
+  )
+  
+  type MainController struct {
+  	beego.Controller
+  }
+  
+  func (c *MainController) Get() {
+  	c.Data["Website"] = "beego.vip"
+  	c.Data["Email"] = "astaxie@gmail.com"
+  	c.TplName = "index.tpl"
+  }
+  
+  // New Lines
+  func (hello *MainController) SayHello(){
+  	hello.TplName = "hello.html"
+  }
+
+  ```
+
+- S2] Views
+
+  Go to views and make `hello.html`
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Hello World !</title>
+  </head>
+  <body>
+      <h1>Hello World !</h1>
+      <p>We are using Beego Framwork for api rounting</p>
+      
+  </body>
+  </html>
+
+  ```
+
+- S3] Routes
+  Go to routers > router.go
+
+  assign new route
+
+  ```go
+  package routers
+  
+  import (
+  	"myapp/controllers"
+  	beego "github.com/beego/beego/v2/server/web"
+  )
+  
+  func init() {
+      beego.Router("/", &controllers.MainController{})
+  	  //new line
+  	  beego.Router("/hello ",&controllers.MainController{} , "get:SayHello") 
+  }
+
+
+  ```
+  
