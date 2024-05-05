@@ -2,6 +2,8 @@ package controllers
 
 import (
 	beego "github.com/beego/beego/v2/server/web"
+	"myapp/models"
+	"log"
 )
 
 type MainController struct {
@@ -27,3 +29,14 @@ func (hello *OwnTestController) SayHello(){
 	hello.Data["name"] = "This is my name !" 
 	hello.TplName = "hello.html"
 }
+
+func (mymate *OwnTestController) GetMaterial(){
+	materials, err := models.GetAllMaterials()
+	if err != nil {
+		// handle error
+		log.Fatal(err)
+	}
+	mymate.Data["Materials"] = materials
+	mymate.TplName = "show.html"
+}
+

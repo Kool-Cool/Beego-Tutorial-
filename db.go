@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	//"databaseType" , "userName:password@/NameOFDataBase"
 	db, err := sql.Open("mysql", "root:@/beegodb")
 	if err != nil {
 		log.Fatal(err)
