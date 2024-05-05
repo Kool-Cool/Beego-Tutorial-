@@ -53,3 +53,7 @@ bee run
 ```
 
 - S5] go to [http://:8080](http://localhost:8080/)
+  
+Result should be 
+
+![](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/images/Screenshot%202024-05-05%20111630.png)
