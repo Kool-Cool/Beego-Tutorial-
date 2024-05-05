@@ -24,5 +24,6 @@ type OwnTestController struct{
 }
 
 func (hello *OwnTestController) SayHello(){
+	hello.Data["name"] = "This is my name !" 
 	hello.TplName = "hello.html"
 }
