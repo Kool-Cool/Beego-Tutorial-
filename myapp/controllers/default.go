@@ -11,10 +11,11 @@ type MainController struct {
 
 
 func (c *MainController) Get() {
-	c.Data["Website"] = "beego.vip"
-	c.Data["Email"] = "astaxie@gmail.com"
-	c.TplName = "index.tpl"
-	// c.Ctx.WriteString("hello world 🤓")
+	// c.Data["Website"] = "beego.vip"
+	// c.Data["Email"] = "astaxie@gmail.com"
+	// c.TplName = "index.tpl"
+	// c.Ctx.WriteString("hello world 🤓 \n Just text (not html file)")
+	c.TplName = "home.html"
 }
 
 // New Lines
