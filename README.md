@@ -138,4 +138,41 @@ Result should be
   Result should be 
 
   ![](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/images/HelloWorld.png)
+
+
+## Making Own New Controller
+
+NOTE:- [Make First Letter Capital](https://www.golinuxcloud.com/golang-variable-naming-convention/#:~:text=The%20convention%20also%20dictates%20that%20the%20names%20of%20global%20variables%20should%20start%20with%20uppercase%20letters%20if%20they%20are%20to%20be%20exported%2C%20meaning%20they%20will%20be%20accessible%20outside%20of%20the%20package.)
+
+- S1] changes in `default.go`
+
+  Make new structures
+  ```go
+  type OwnTestController struct{
+  	beego.Controller
+  }
+  
+  func (hello *OwnTestController) SayHello(){
+  	hello.TplName = "hello.html"
+  }
+  ```
+
+- S2] changes in `router.go`
+  update the name of Controller
+
+  ```go
+  package routers
+  
+  import (
+  	"myapp/controllers"
+  	beego "github.com/beego/beego/v2/server/web"
+  )
+  
+  func init() {
+      beego.Router("/", &controllers.MainController{})
+  	//new line
+  	beego.Router("/hello",&controllers.OwnTestController{} , "get:SayHello")
+  }
+
+  ```
     
