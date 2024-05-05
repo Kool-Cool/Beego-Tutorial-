@@ -8,13 +8,20 @@ type MainController struct {
 	beego.Controller
 }
 
+
+
 func (c *MainController) Get() {
 	c.Data["Website"] = "beego.vip"
 	c.Data["Email"] = "astaxie@gmail.com"
 	c.TplName = "index.tpl"
+	// c.Ctx.WriteString("hello world 🤓")
 }
 
 // New Lines
-func (hello *MainController) SayHello(){
+type OwnTestController struct{
+	beego.Controller
+}
+
+func (hello *OwnTestController) SayHello(){
 	hello.TplName = "hello.html"
 }
