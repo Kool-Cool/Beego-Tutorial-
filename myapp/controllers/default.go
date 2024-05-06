@@ -37,6 +37,7 @@ func (hello *OwnTestController) SayHello(){
 func init() {
 	orm.Debug = true // Enable debug logs
     orm.RegisterDriver("mysql", orm.DRMySQL)
+						//"databaseType" , "userName:password@/NameOFDataBase"
     orm.RegisterDataBase("default", "mysql", "root:@/beegodb")
     orm.RegisterModel(new(models.Material))
 	fmt.Println("Database initialized successfully")
@@ -54,5 +55,7 @@ func (mymate *OwnTestController) GetMaterial(){
 	} else {
 		mymate.Data["Materials"] = materials
 	}
-	mymate.TplName = "show.html"
+	// mymate.TplName = "show.html"
+	mymate.Ctx.JSONResp(materials) 
+
 }
