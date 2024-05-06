@@ -197,3 +197,77 @@ to access value , change html file `{{.attribute}}`
 ```html
 <h2>{{.name}}</h2>
 ```
+
+## Connecting DataBase (MySQL) in GOlang  
+---
+Please refer the [db.go](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/db.go)
+
+
+## Connecting the DataBase with ORM
+---
+
+- S1] Make model
+
+  Make new file under `models/material.go`
+
+  ```go
+	type Material struct {
+		MaterialID   int    `orm:"column(material_id);pk"`
+		MaterialName string `orm:"column(material_name)"`
+		MaterialSubtype string `orm:"column(material_subtype)"`
+	}
+
+  ```
+
+
+- S2] Establishing the connection with database
+
+  Make new function `init()` to Establish connection with DataBase and Models
+  at `controllers/default.go`
+
+  ```go
+	func init() {
+		orm.Debug = true // Enable debug logs
+	    orm.RegisterDriver("mysql", orm.DRMySQL)
+							//"databaseType" , "userName:password@/NameOFDataBase"
+	    orm.RegisterDataBase("default", "mysql", "root:@/beegodb")
+	    orm.RegisterModel(new(models.Material))
+		fmt.Println("Database initialized successfully")
+	
+	}
+  ```
+
+- S3] Using data from Model
+
+    make new function to handle requests at `controllers/default.go`
+
+    ```go
+	func (mymate *OwnTestController) GetMaterial(){
+		o := orm.NewOrm()
+		materials := make([]*models.Material, 0)
+		qs := o.QueryTable("material")
+		_, err := qs.All(&materials)
+		if err != nil {
+			mymate.Data["error"] = err
+		} else {
+			mymate.Data["Materials"] = materials
+		}
+		// mymate.TplName = "show.html"
+		mymate.Ctx.JSONResp(materials) 
+	
+	}
+    ```
+
+    change query as per required !
+    
+- S4] Updating The Routes at `router.go/router.go`
+
+     ```
+	beego.Router("/material", &controllers.OwnTestController{}, "get:GetMaterial"
+     ```
+
+	OutPut Result should be 
+
+  	![](https://github.com/Kool-Cool/Beego-Tutorial-/blob/main/images/output.png)
+  	
+  
