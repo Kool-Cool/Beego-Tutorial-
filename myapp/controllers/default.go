@@ -42,7 +42,6 @@ func init() {
     orm.RegisterModel(new(models.Material))
 	fmt.Println("Database initialized successfully")
 
-
 }
 
 func (mymate *OwnTestController) GetMaterial(){
