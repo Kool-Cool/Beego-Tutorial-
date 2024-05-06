@@ -1,9 +1,11 @@
 package controllers
 
 import (
-	beego "github.com/beego/beego/v2/server/web"
+	
 	"myapp/models"
-	"log"
+	"fmt"
+	"github.com/beego/beego/v2/client/orm"
+	beego "github.com/beego/beego/v2/server/web"
 )
 
 type MainController struct {
@@ -21,6 +23,7 @@ func (c *MainController) Get() {
 }
 
 // New Lines
+
 type OwnTestController struct{
 	beego.Controller
 }
@@ -30,13 +33,26 @@ func (hello *OwnTestController) SayHello(){
 	hello.TplName = "hello.html"
 }
 
-func (mymate *OwnTestController) GetMaterial(){
-	materials, err := models.GetAllMaterials()
-	if err != nil {
-		// handle error
-		log.Fatal(err)
-	}
-	mymate.Data["Materials"] = materials
-	mymate.TplName = "show.html"
+
+func init() {
+	orm.Debug = true // Enable debug logs
+    orm.RegisterDriver("mysql", orm.DRMySQL)
+    orm.RegisterDataBase("default", "mysql", "root:@/beegodb")
+    orm.RegisterModel(new(models.Material))
+	fmt.Println("Database initialized successfully")
+
+
 }
 
+func (mymate *OwnTestController) GetMaterial(){
+	o := orm.NewOrm()
+	materials := make([]*models.Material, 0)
+	qs := o.QueryTable("material")
+	_, err := qs.All(&materials)
+	if err != nil {
+		mymate.Data["error"] = err
+	} else {
+		mymate.Data["Materials"] = materials
+	}
+	mymate.TplName = "show.html"
+}
